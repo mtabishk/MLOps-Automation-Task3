@@ -1,90 +1,86 @@
-from keras.preprocessing.image import ImageDataGenerator
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Conv2D, MaxPooling2D, ZeroPadding2D
-from keras.layers.normalization import BatchNormalization
-from keras.regularizers import l2
-from keras.datasets import mnist
-from keras.utils import np_utils
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
+from __future__ import print_function
 import keras
+from keras.datasets import mnist
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Flatten
+from keras.layers import Conv2D, MaxPooling2D
+from keras import backend as K
+import os
 
-# loads the MNIST dataset
-(x_train, y_train), (x_test, y_test)  = mnist.load_data()
+def model_train(epoch,n):
+    batch_size = 32
+    num_classes = 10
+    epochs = epoch
 
-# Lets store the number of rows and columns
-img_rows = x_train[0].shape[0]
-img_cols = x_train[1].shape[0]
+    # input image dimensions
+    img_rows, img_cols = 28, 28
 
-# Getting our date in the right 'shape' needed for Keras
-# We need to add a 4th dimenion to our date thereby changing our
-# Our original image shape of (60000,28,28) to (60000,28,28,1)
-x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
-x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
+    # the data, split between train and test sets
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
-# store the shape of a single image 
-input_shape = (img_rows, img_cols, 1)
+    if K.image_data_format() == 'channels_first':
+        x_train = x_train.reshape(x_train.shape[0], 1, img_rows, img_cols)
+        x_test = x_test.reshape(x_test.shape[0], 1, img_rows, img_cols)
+        input_shape = (1, img_rows, img_cols)
+    else:
+        x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
+        x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
+        input_shape = (img_rows, img_cols, 1)
 
-# change our image type to float32 data type
-x_train = x_train.astype('float32')
-x_test = x_test.astype('float32')
+    x_train = x_train.astype('float32')
+    x_test = x_test.astype('float32')
+    x_train /= 255
+    x_test /= 255
+    print('x_train shape:', x_train.shape)
+    print(x_train.shape[0], 'train samples')
+    print(x_test.shape[0], 'test samples')
 
-# Normalize our data by changing the range from (0 to 255) to (0 to 1)
-x_train /= 255
-x_test /= 255
+    # convert class vectors to binary class matrices
+    y_train = keras.utils.to_categorical(y_train, num_classes)
+    y_test = keras.utils.to_categorical(y_test, num_classes)
 
-# Now we one hot encode outputs
-y_train = np_utils.to_categorical(y_train)
-y_test = np_utils.to_categorical(y_test)
-
-num_classes = y_test.shape[1]
-num_pixels = x_train.shape[1] * x_train.shape[2]
-
-
-
-# create model
-model = Sequential()
-
-# 1 set of CRP (Convolution, RELU, Pooling)
-model.add(Conv2D(5, (3, 3),
-                  
-                 input_shape = input_shape))
-model.add(Activation("relu"))
-model.add(MaxPooling2D(pool_size = (5,5), strides = (3, 3)))
-
-
-# Fully connected layers (w/ RELU)
-model.add(Flatten())
-model.add(Dense(units=5, input_dim=28*28, activation='relu'))
-
-
-# Softmax (for classification)
-model.add(Dense(units=10, activation='softmax'))
-
-from keras.optimizers import RMSprop
-           
-model.compile(optimizer=RMSprop(), loss='categorical_crossentropy', 
-             metrics=['accuracy']
-             )
+    model = Sequential()
     
-print(model.summary())
+    model.add(Conv2D(32, kernel_size=(3, 3),
+                     activation='relu',
+                     input_shape=input_shape))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    if n>1:
+        model.add(Conv2D(32, kernel_size=(3, 3),
+                     activation='relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Flatten())
+    model.add(Dense(128, activation='relu'))
+    model.add(Dense(num_classes, activation='softmax'))
+
+    model.compile(loss=keras.losses.categorical_crossentropy,
+                  optimizer=keras.optimizers.Adadelta(),
+                  metrics=['accuracy'])
+
+    model.fit(x_train, y_train,
+              batch_size=batch_size,
+              epochs=epochs,
+              verbose=1,
+              validation_data=(x_test, y_test))
+    score = model.evaluate(x_test, y_test, verbose=0)
+    a=score[1]*100
+    model.save("MNIST.h5")
+    os.system("mv /MNIST.h5 /mycode")
+    return a
+
+no_epoch=1
+no_layer=1
+accuracy_train_model=model_train(no_epoch,no_layer)
+f = open("accuracy.txt","w+")
+f.write(str(accuracy_train_model))
+f.close()
+os.system("mv /accuracy.txt /mycode")
 
 
-# Training Parameters
-batch_size = 128
-epochs = 1
-
-history = model.fit(x_train, y_train,
-          batch_size=batch_size,
-          epochs=epochs,
-          validation_data=(x_test, y_test),
-          shuffle=True)
-
-model.save("mnist_LeNet.h5")
-
-# Evaluate the performance of our trained model
-scores = model.evaluate(x_test, y_test, verbose=1)
-accuracy_score=scores[1]
-f=open("output.txt","w")
-f.write(str(100*accuracy_score))
-print('Test loss:', scores[0])
-print('Test accuracy:', scores[1])
+# In[ ]:
