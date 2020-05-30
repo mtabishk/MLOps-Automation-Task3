@@ -13,3 +13,9 @@
 #### 7. Job4 : if metrics accuracy is less than 80%  , then tweak the machine learning model architecture.
 #### 8. Job5: Retrain the model or notify that the best model is being created
 #### 9. Create One extra job job6 for monitor : If container where app is running. fails due to any reason then this job should automatically start the container again from where the last trained model left
+
+```Dataset used to train this Model:
+Fashion MNIST dataset. It consists of a training set of 60,000 
+examples and a test set of 10,000 examples. 
+Each one is a 28x28 grayscale image, associated with a label from 10 classes```
+
