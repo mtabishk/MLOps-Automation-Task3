@@ -38,23 +38,32 @@ RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and con
 ![](images/dpush.png)
 ![](images/dhub.png)
 
-## STEP 2: Setup Jenkins Jobs
+## STEP 3: Setup Jenkins Jobs
 #### Job1: For fetching repo from GitHub
 This job will copy repository from github whenever developer pushes the code to Github. This job has a build trigger Poll SCM enabled in it that will check every minute if there is any update in github.
 ![](images/1.png)
 
-#### Job2: For launching container
-This job is interesting it will check the code/program file then automatically launch container having the respective language interpreter installed in it. This job is also chainnned with Job1. It will run only when Job1 is successfully build.
+#### Job2: Jenkins should automatically start the respective machine learning software installed interpreter install image container to deploy code  and start training
+
+![](images/2.png)
+![](images/2a.png)
+
+#### Job3: Train your model and predict accuracy or metrics.
+
+![](images/3.png)
+![](images/3a.png)
+
+#### Job4: if metrics accuracy is less than 90%  , then tweak the machine learning model architecture.
+This Job will automatically launch the container if for some reason container is down
+![](images/4.png)
+![](images/4a.png)
+
+#### Job5:  Retrain the model or notify that the best model is being created
+![](images/5.png)
+
+#### Job6: If container where app is running. fails due to any reason then this job should automatically start the container again from where the last trained model left
 ![](images/6.png)
 
-#### Job3: For Testing
-This job tests our web application. If its running then the job will build successfully otherwise it will fail and it will send email to developer that the job is failed.
-![](images/7.png)
-![](images/8.png)
-
-#### Job4: For monitoring container
-This Job will automatically launch the container if for some reason container is down
-![](images/9.png)
-
 ### Dashboard
-![](images/0.png)
+![](images/build_pipeline.png)
+
