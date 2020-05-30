@@ -17,6 +17,44 @@
 ```
 Dataset used to train this Model: 
 Fashion MNIST dataset. It consists of a training set of 60,000 
-examples and a test set of 10,000 examples. Each one is a 28x28 grayscale image, associated with a label from 10 classes
+examples and a test set of 10,000 examples. Each one is a 28x28 grayscale image, 
+associated with a label from 10 classes
 ```
+***Assumptions:
+RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and configured. Java and Jenkins with plugins like Build Pipeline, GitHub  should be installed and configured too  ***
 
+## STEP 1: Git and GitHub
+1. Create a repository on GitHub then clone that repository on your local machine using Git. Commit your code and push it to GitHub.
+![](images/git.png)
+![](images/github.png)
+
+## STEP 2: Dockerfile and DockerHub
+1. Create a Dockerfile for creating a container image having CentOS and all other dependencies installed for training our ML Model.
+![](images/df.png)
+2. Build the Dockerfile using the name tag of your docker hub account so that we can upload our container image to docker hub.
+![](images/bdf.png)
+![](images/dimage.png)
+3. Push the container image to Docker Hub
+![](images/dpush.png)
+![](images/dhub.png)
+
+## STEP 2: Setup Jenkins Jobs
+#### Job1: For fetching repo from GitHub
+This job will copy repository from github whenever developer pushes the code to Github. This job has a build trigger Poll SCM enabled in it that will check every minute if there is any update in github.
+![](images/1.png)
+
+#### Job2: For launching container
+This job is interesting it will check the code/program file then automatically launch container having the respective language interpreter installed in it. This job is also chainnned with Job1. It will run only when Job1 is successfully build.
+![](images/6.png)
+
+#### Job3: For Testing
+This job tests our web application. If its running then the job will build successfully otherwise it will fail and it will send email to developer that the job is failed.
+![](images/7.png)
+![](images/8.png)
+
+#### Job4: For monitoring container
+This Job will automatically launch the container if for some reason container is down
+![](images/9.png)
+
+### Dashboard
+![](images/0.png)
