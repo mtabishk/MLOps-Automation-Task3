@@ -25,7 +25,7 @@ RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and con
 
 ## STEP 1: Git and GitHub
 1. Create a repository on GitHub then clone that repository on your local machine using Git. Commit your code and push it to GitHub.
-![](images/git.png)
+![](images/git11.png)
 ![](images/github.png)
 
 ## STEP 2: Dockerfile and DockerHub
