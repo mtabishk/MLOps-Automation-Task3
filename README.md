@@ -69,28 +69,29 @@ This job will copy repository from github whenever developer pushes the code to 
 
 ![](images/31.png)
 ![](images/32.png)
-
 ##### Console Output of Job3
 ![](images/j3.png)
+
 
 #### Job4: if metrics accuracy is less than 80% , then tweak the machine learning model architecture.
 
 ![](images/41.png)
 ![](images/42.png)
-
 ##### Console Output of Job3
 ![](images/j4.png)
+
 
 #### Job5:  Retrain the model or notify that the best model is being created
 ![](images/51.png)
 ![](images/52.png)
-
 ##### Console Output of Job3
 ![](images/j5.png)
+
 
 #### Job6: If container where app is running. fails due to any reason then this job should automatically start the container again from where the last trained model left
 ![](images/61.png)
 ![](images/62.png)
+
 
 ## Complete Build Pipeline
 
