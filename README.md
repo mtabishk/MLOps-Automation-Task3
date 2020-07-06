@@ -14,12 +14,9 @@
 #### 8. Job5: Retrain the model or notify that the best model is being created
 #### 9. Create One extra job job6 for monitor : If container where app is running. fails due to any reason then this job should automatically start the container again from where the last trained model left
 
-```
-Dataset used to train this Model: 
-MNIST dataset. It consists of a training set of 60,000 
-examples and a test set of 10,000 examples. Each one is a 28x28 grayscale image, 
-associated with a label from 10 classes
-```
+
+#### Dataset used to train this Model: MNIST (Modified National Institute of Standards and Technology) dataset. The MNIST dataset is a large database of handwritten digits that is commonly used for training various image processing systems. The database is also widely used for training and testing in the field of machine learning. It consists of a training set of 60,000 examples and a test set of 10,000 examples. Each one is a 28x28 grayscale image, associated with a label from 10 classes
+
 ***Assumptions:
 RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and configured. Java and Jenkins with plugins like Build Pipeline, GitHub  should be installed and configured too  ***
 
@@ -33,16 +30,28 @@ RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and con
 #### Dockerfile for sklearn library and all the dependencies
 ![](images/df1.png)
 Build the Dockerfile using the name tag of your docker hub account so that we can upload our container image to docker hub.
-Run these commands: 
+##### Run these commands: 
 ``` docker build -t mtabishk/sklearnenv . ```
+
 ``` docker login ```
+
 ``` docker push mtabishk/sklearnenv```
 
-![](images/bdf.png)
-![](images/dimage.png)
-3. Push the container image to Docker Hub
-![](images/dpush.png)
-![](images/dhub.png)
+#### Dockerfile for keras library and all the dependencies
+![](images/df2.png)
+Build the Dockerfile using the name tag of your docker hub account so that we can upload our container image to docker hub.
+##### Run these commands: 
+``` docker build -t mtabishk/kerasnenv . ```
+
+``` docker login ```
+
+``` docker push mtabishk/kerasenv```
+
+#### Docker Hub 
+![](images/dh.png)
+
+#### Docker images
+![](images/di.png)
 
 ## STEP 3: Setup Jenkins Jobs
 #### Job1: For fetching repo from GitHub
