@@ -22,7 +22,7 @@
 RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and configured. Java and Jenkins with plugins like Build Pipeline, GitHub  should be installed and configured too  ***
 
 ## STEP 1: GitHub
-1. Create a repository on GitHub and upload all the the files required to complete the task there. 
+1. Create a repository on GitHub and upload all the files required to complete the task there. 
 ![](images/github.png)
 
 ## STEP 2: Dockerfile and DockerHub
