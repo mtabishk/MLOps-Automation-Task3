@@ -21,7 +21,7 @@
 ***Assumptions:
 RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and configured. Java and Jenkins with plugins like Build Pipeline, GitHub  should be installed and configured too  ***
 
-## STEP 1: Git and GitHub
+## STEP 1: GitHub
 1. Create a repository on GitHub and upload all the the files required to complete the task there. 
 ![](images/github.png)
 
@@ -56,29 +56,43 @@ Build the Dockerfile using the name tag of your docker hub account so that we ca
 ## STEP 3: Setup Jenkins Jobs
 #### Job1: For fetching repo from GitHub
 This job will copy repository from github whenever developer pushes the code to Github. This job has a build trigger Poll SCM enabled in it that will check every minute if there is any update in github.
-![](images/1.png)
+![](images/j11.png)
+![](images/j12.png)
+![](images/j13.png)
 
 #### Job2: Jenkins should automatically start the respective machine learning software installed interpreter install image container to deploy code  and start training
 
-![](images/2.png)
-![](images/2a.png)
+![](images/j21.png)
+![](images/j22.png)
 
 #### Job3: Train your model and predict accuracy or metrics.
 
-![](images/3.png)
-![](images/3a.png)
+![](images/31.png)
+![](images/32.png)
 
-#### Job4: if metrics accuracy is less than 90%  , then tweak the machine learning model architecture.
-This Job will automatically launch the container if for some reason container is down
-![](images/4.png)
-![](images/4a.png)
+##### Console Output of Job3
+![](images/j3.png)
+
+#### Job4: if metrics accuracy is less than 80% , then tweak the machine learning model architecture.
+
+![](images/41.png)
+![](images/42.png)
+
+##### Console Output of Job3
+![](images/j4.png)
 
 #### Job5:  Retrain the model or notify that the best model is being created
-![](images/5.png)
+![](images/51.png)
+![](images/52.png)
+
+##### Console Output of Job3
+![](images/j5.png)
 
 #### Job6: If container where app is running. fails due to any reason then this job should automatically start the container again from where the last trained model left
-![](images/6.png)
+![](images/61.png)
+![](images/62.png)
 
-### Dashboard
-![](images/build_pipeline.png)
+## Complete Build Pipeline
+
+![](images/buildpipe.png)
 
