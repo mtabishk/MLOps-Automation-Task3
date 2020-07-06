@@ -1,4 +1,4 @@
-# MLOps-Automation-Task3
+# MLOps-Task3
 ## Project: Automation in training of Machine Learning Model using DevOps Tools.
 
 ![](images/0.png)
@@ -16,7 +16,7 @@
 
 ```
 Dataset used to train this Model: 
-Fashion MNIST dataset. It consists of a training set of 60,000 
+MNIST dataset. It consists of a training set of 60,000 
 examples and a test set of 10,000 examples. Each one is a 28x28 grayscale image, 
 associated with a label from 10 classes
 ```
@@ -24,14 +24,20 @@ associated with a label from 10 classes
 RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and configured. Java and Jenkins with plugins like Build Pipeline, GitHub  should be installed and configured too  ***
 
 ## STEP 1: Git and GitHub
-1. Create a repository on GitHub then clone that repository on your local machine using Git. Commit your code and push it to GitHub.
-![](images/git11.png)
+1. Create a repository on GitHub and all the the files required to complete the task there. Here I am uploading 4 Files:
+ a. Mnist.py : This is a python code for creating a Machine Learning model that uses MNIST Dataset(The MNIST dataset contains binary images of handwritten digits.
 ![](images/github.png)
 
 ## STEP 2: Dockerfile and DockerHub
-1. Create a Dockerfile for creating a container image having CentOS and all other dependencies installed for training our ML Model.
-![](images/df.png)
-2. Build the Dockerfile using the name tag of your docker hub account so that we can upload our container image to docker hub.
+1. Create two Dockerfiles for creating  two container images, first one having complete environment that uses sklearn library and the other one having complete environment that uses keras library for training our Machine Learning model.
+#### Dockerfile for sklearn library and all the dependencies
+![](images/df1.png)
+Build the Dockerfile using the name tag of your docker hub account so that we can upload our container image to docker hub.
+Run these commands: 
+``` docker build -t mtabishk/sklearnenv . ```
+``` docker login ```
+``` docker push mtabishk/sklearnenv```
+
 ![](images/bdf.png)
 ![](images/dimage.png)
 3. Push the container image to Docker Hub
