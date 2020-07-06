@@ -15,7 +15,8 @@
 #### 9. Create One extra job job6 for monitor : If container where app is running. fails due to any reason then this job should automatically start the container again from where the last trained model left
 
 
-#### Dataset used to train this Model: MNIST (Modified National Institute of Standards and Technology) dataset. The MNIST dataset is a large database of handwritten digits that is commonly used for training various image processing systems. The database is also widely used for training and testing in the field of machine learning. It consists of a training set of 60,000 examples and a test set of 10,000 examples. Each one is a 28x28 grayscale image, associated with a label from 10 classes
+### Dataset used to train this Model: 
+###### MNIST (Modified National Institute of Standards and Technology) dataset. The MNIST dataset is a large database of handwritten digits that is commonly used for training various image processing systems. The database is also widely used for training and testing in the field of machine learning. It consists of a training set of 60,000 examples and a test set of 10,000 examples. Each one is a 28x28 grayscale image, associated with a label from 10 classes
 
 ***Assumptions:
 RedHat Linux 8 or Centos 8 running in a Virtual box. Docker is installed and configured. Java and Jenkins with plugins like Build Pipeline, GitHub  should be installed and configured too  ***
