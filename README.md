@@ -77,14 +77,14 @@ This job will copy repository from github whenever developer pushes the code to 
 
 ![](images/j41.png)
 ![](images/j42.png)
-##### Console Output of Job3
+##### Console Output of Job4
 ![](images/j4.png)
 
 
 #### Job5:  Retrain the model or notify that the best model is being created
 ![](images/j51.png)
 ![](images/j52.png)
-##### Console Output of Job3
+##### Console Output of Job5
 ![](images/j5.png)
 
 
